@@ -1,0 +1,383 @@
+PROPUESTA DE DESARROLLO DE SOFTWARE
+Plataforma PWA Modular para el
+Alquiler de Ropa de Lujo
+Inventario inteligente  ·  Calendario visual  ·  Experiencia premium
+
+PREPARADO PARA
+María Paula Orejuela
+Santiago de Cali, Valle del Cauca
+PRESENTADO POR
+César Andrés Lozano Pulido
+Ingeniero de Sistemas
+Especialista en Seguridad de la Información  ·  Analista de Datos certificado por Google
+21 de mayo de 2026
+DOCUMENTO CONFIDENCIAL
+
+Contenido
+	1. Resumen Ejecutivo	3
+	2. Contexto y Oportunidad de Mercado	3
+	3. Benchmarking: Análisis Competitivo	4
+	4. Propuesta Funcional	5
+	Módulos del sistema	5
+	Roles de usuario	7
+	Sitio web y CMS	8
+	5. Propuesta Técnica y Tecnológica	8
+	Arquitectura general	8
+	Seguridad de la información	9
+	Integraciones	9
+	6. Propuesta Económica	9
+	Qué incluye la inversión	10
+	Forma de pago	10
+	Costos de infraestructura en la nube	10
+	7. Cronograma de Desarrollo	11
+	8. Soporte, Garantía y Marca Blanca	12
+	Soporte incluido (6 meses)	12
+	Entrega en marca blanca	12
+	9. Supuestos, Exclusiones y Condiciones	12
+	Exclusiones	12
+	Condiciones	12
+	10. Aceptación de la Propuesta	13
+
+
+1. Resumen Ejecutivo
+La presente propuesta describe el diseño y desarrollo de una aplicación web progresiva (PWA) modular para la operación del negocio de alquiler de ropa de lujo de la señora María Paula Orejuela, con sede en Santiago de Cali. El objetivo es digitalizar y elevar la operación del negocio, protegiendo el activo más valioso de este modelo: la exclusividad y el estado impecable de cada prenda.
+La plataforma se construye sobre tres pilares funcionales. El primero es el control inteligente del inventario y del ciclo de vida de cada prenda, entendiendo que se trata de piezas únicas —un solo vestido por modelo— de marcas como Dolce & Gabbana, Louis Vuitton, Versace y Silvia Tcherassi. El segundo es una operación centrada en un calendario altamente visual, que agiliza el trabajo diario de las asesoras comerciales. El tercero es una experiencia premium para el cliente final, que integra autogestión por código QR, pasarela de pago, punto de venta, contratos automáticos, notificaciones, un CRM propio y un agente de inteligencia artificial.
+El sistema se diseña desde el primer día como una solución multitenant y multisede, de modo que la propietaria pueda administrar varias sedes bajo una misma cuenta y, en el futuro, comercializar el desarrollo como un producto propio. La entrega se realiza en marca blanca, con el código fuente y la propiedad total del software para la clienta.
+
+Inversión total
+$18.000.000 COP  (no incluye impuestos)
+Plazo de desarrollo
+2 meses
+Soporte incluido
+6 meses posteriores a la entrega total
+Modalidad de entrega
+Marca blanca — código fuente y propiedad total del software
+Forma de pago
+50% al inicio  ·  25% en la entrega del MVP  ·  25% en la entrega total
+2. Contexto y Oportunidad de Mercado
+El mercado de alquiler de ropa en línea mantiene un crecimiento sostenido a nivel global. De acuerdo con las referencias de mercado consultadas, este segmento podría alcanzar cerca de USD 7.900 millones hacia 2032, mientras que el alquiler de ropa de lujo proyecta tasas de crecimiento anual superiores al 11%. Este crecimiento se explica por la sostenibilidad, el auge de los eventos sociales, el consumo aspiracional, el turismo premium y la influencia de las redes sociales.
+En Latinoamérica el espacio de crecimiento es amplio: existe una alta demanda de lujo aspiracional y un público que desea proyectar una imagen premium sin asumir el costo de adquirir prendas de muy alto valor. El negocio de la clienta se ubica precisamente en ese punto de oportunidad.
+Un principio rige todo el diseño de esta plataforma: en el segmento de lujo, la prenda no es inventario, es reputación. Una sola prenda que parezca usada puede erosionar la percepción de exclusividad y la confianza de una clientela de alto estatus. Por ello, el sistema gestiona cada prenda como un activo con un ciclo de vida controlado —de forma análoga a cómo una aerolínea gestiona el mantenimiento de su flota— e incorpora la “depreciación” programada de las prendas para preservar la exclusividad.
+3. Benchmarking: Análisis Competitivo
+Como parte del diseño se analizaron las principales plataformas y software del mercado internacional: tanto referentes de negocio de alquiler de moda como herramientas especializadas de gestión de rentas. El objetivo fue identificar las mejores prácticas para incorporarlas a este desarrollo.
+Rent the Runway (Estados Unidos)
+Es el referente mundial del alquiler de moda. Opera con un modelo de suscripción mensual combinado con alquileres por períodos fijos de 4 u 8 días (programa “Reserve”), y gestiona el ciclo completo de la prenda con más de 800 diseñadores aliados. Su operación se sustenta en una logística inversa de alta velocidad: procesa el 60% de las prendas el mismo día y opera una de las mayores plantas de limpieza profesional de Norteamérica. Su principal lección es que el inventario de moda es dinámico y perecedero, y debe administrarse con estados operativos y tiempos de limpieza entre alquileres.
+CaaStle (Estados Unidos)
+Empresa B2B que ofrece tecnología de “Clothing as a Service” en marca blanca a marcas como Vince, Rebecca Minkoff y Banana Republic. Su plataforma personalizable integra gestión de inventario, perfiles de cliente y pagos seguros. Es el referente directo de la visión de la clienta de comercializar a futuro el desarrollo: confirma la importancia de una arquitectura multitenant y de una entrega en marca blanca.
+By Rotation, HURR y Pickle (Reino Unido / Estados Unidos)
+Plataformas de alquiler de lujo entre pares. By Rotation aplica un sistema de acceso por niveles: un cliente debe completar varios alquileres de menor valor antes de acceder a piezas de mayor precio, y maneja períodos flexibles de 3, 7 y 30 días. HURR combina alquiler gestionado y entre pares. La lección clave es la clasificación y el “scoring” del cliente, que permite proteger las piezas más exclusivas y reservarlas para la clientela VIP.
+Booqable y Rentle (software de gestión de alquileres)
+Software especializado de gestión de rentas. Booqable destaca por la generación y escaneo de códigos de barras desde el celular, la disponibilidad en tiempo real, la firma electrónica de contratos y los paquetes de productos. Rentle aporta calendario de reservas, catálogo, contrato con firma electrónica y el modelo “alquilar y vender”. Ambos aportan el conjunto de herramientas operativas que hacen ágil el día a día.
+
+Funciones del benchmarking incorporadas a este desarrollo
+Función destacada
+Referente
+Aplicación en el desarrollo
+Estados operativos del ciclo de vida de la prenda (disponible, reservada, alquilada, en limpieza, en tránsito, retirada)
+Rent the Runway
+Módulo de Inventario
+Buffer automático de limpieza y mantenimiento entre alquileres
+Rent the Runway
+Calendario y Reservas
+Alquiler por períodos fijos definidos
+Rent the Runway
+Pagos y Reservas
+Arquitectura multitenant y entrega en marca blanca
+CaaStle
+Arquitectura técnica
+Clasificación y scoring de clientes con niveles VIP
+By Rotation / HURR
+CRM
+Bloqueo de prendas de menor categoría para clientes VIP
+By Rotation
+Inventario + CRM
+Escaneo de códigos QR desde el celular
+Booqable
+Autogestión e Inventario
+Firma electrónica de contratos
+Booqable / Rentle
+Pagos y Contratos
+Disponibilidad en tiempo real en el calendario
+Booqable / Rentle
+Calendario Visual
+Paquetes de prendas y accesorios
+Booqable
+Pagos y Punto de Venta
+Sistema de clasificación de calidad (A+ a C)
+Buenas prácticas del lujo
+Inventario
+Métrica Costo por Uso (CPW) y rentabilidad acumulada
+Buenas prácticas del lujo
+Inventario y Reportes
+4. Propuesta Funcional
+La plataforma se compone de diez módulos integrados. El acceso a cada módulo y a cada acción se restringe según el rol del usuario, garantizando que cada persona vea y opere únicamente lo que le corresponde.
+Módulos del sistema
+Módulo 1 · Inventario Inteligente y Ciclo de Vida de la Prenda
+Cada prenda se registra como una pieza única e irrepetible, con una ficha completa y trazable a lo largo de toda su vida útil dentro del negocio.
+Ficha única por prenda: marca, modelo, talla, color, materiales, valor comercial, fotografías reales y código QR único.
+Estados operativos en tiempo real: disponible, reservada, alquilada, en limpieza o mantenimiento, en tránsito y retirada.
+Clasificación de calidad: niveles A+ (nueva / editorial), A (impecable), B+ (muy buen estado), B (uso visible leve) y C (solo liquidación).
+“Depreciación” automática: al alcanzar un umbral configurable de N alquileres, la prenda baja de categoría o se marca para retiro, preservando la exclusividad ante una clientela de alto estatus.
+Historial completo: alquileres, daños, reparaciones, costos de mantenimiento y observaciones de cada salida.
+Indicadores de rentabilidad: Costo por Uso (CPW) y rentabilidad acumulada por prenda.
+Rotación de inventario: alertas y reportes para identificar prendas de baja rotación o próximas a su retiro.
+Módulo 2 · Calendario Visual y Gestión de Reservas
+El calendario es el corazón visual de la operación y permanece siempre presente como panel principal de trabajo de las asesoras comerciales.
+Calendario maestro por sede con código de colores según el estado de cada prenda.
+Vistas por día, semana y mes y línea de tiempo por prenda.
+Creación ágil de reservas con arrastrar y soltar.
+Bloqueo automático de fechas y buffer de limpieza y mantenimiento entre un alquiler y el siguiente.
+Disponibilidad inmediata para responder al cliente en segundos.
+Gestión de fechas de salida y de entrega o devolución de cada prenda.
+Módulo 3 · Autogestión del Cliente (Código QR)
+Cada prenda lleva un código QR único. Al escanearlo, el cliente accede a un micrositio donde consulta la información de la prenda sin necesidad de iniciar sesión.
+Disponibilidad y próximas fechas libres de la prenda.
+Ficha visual: fotografías, características, talla y composición.
+Estado y categoría actual de la prenda.
+Contacto o solicitud de reserva directa con una asesora comercial.
+Módulo 4 · Pagos, Punto de Venta y Contratos
+Este módulo unifica el cobro en caja y el cobro en línea, y automatiza la generación del contrato de responsabilidad.
+Pasarela de pago: integración con tarjetas, PSE y Nequi (se recomienda Wompi).
+Punto de venta (POS): cobro presencial en caja.
+Contrato automático: al confirmarse el pago —en caja o por la pasarela— el sistema genera el contrato de responsabilidad en PDF.
+Contenido del contrato: fecha de salida, fecha de entrega y las características actuales de la prenda al momento del alquiler.
+Firma electrónica y envío automático al cliente por correo y, opcionalmente, por WhatsApp.
+Depósito de garantía o “protección premium” para cubrir daños o pérdidas.
+Paquetes de prenda más accesorios.
+Módulo 5 · Notificaciones Automáticas y Gestión de Multas
+El sistema mantiene informado al cliente y protege la operación con avisos y cobros automáticos.
+Aviso de la próxima fecha de salida de una prenda reservada.
+Aviso de la próxima fecha de entrega o devolución.
+Cálculo y cobro automático de multas cuando se supera la fecha de entrega.
+Recordatorios configurables por correo electrónico y, opcionalmente, por WhatsApp.
+Módulo 6 · CRM (Gestión de Relaciones con el Cliente)
+Un CRM propio, desarrollado a la medida del negocio, que centraliza la relación con cada cliente.
+Ficha 360° del cliente: datos, tallas, preferencias e historial completo de alquileres.
+Segmentación y scoring de clientes, con niveles VIP.
+Reglas de exclusividad: posibilidad de reservar las prendas de mayor categoría para la clientela VIP.
+Embudo comercial y seguimiento de oportunidades por asesora.
+Historial de interacciones y notas de cada asesora.
+Módulo 7 · Agente de Inteligencia Artificial
+Un agente conversacional disponible en la plataforma, tanto para los clientes como para las asesoras comerciales.
+Atención a clientes: responde sobre disponibilidad, características de las prendas, políticas y proceso de alquiler.
+Asistente interno: apoya a las asesoras con consultas rápidas de inventario, fechas y procedimientos.
+Conocimiento del negocio: se basa en la información real del catálogo y en las políticas de la empresa.
+Módulo 8 · Auditoría y Trazabilidad
+Un registro de auditoría que garantiza control total sobre las operaciones sensibles del negocio.
+Registro inmutable de cambios en reservas, entregas, devoluciones y pagos.
+Trazabilidad completa: cada evento queda asociado a quién lo realizó, qué cambió y cuándo.
+Consulta y filtrado de la bitácora por usuario, sede, fecha o tipo de operación.
+Módulo 9 · Administración: Multitenant, Multisede y Roles
+La estructura administrativa permite operar varias sedes hoy y comercializar el producto mañana.
+Arquitectura multitenant: cada negocio o cuenta opera de forma aislada y segura.
+Gestión multisede: varias sedes bajo una misma cuenta, cada una con su inventario y calendario.
+Roles diferenciados: tres perfiles con permisos específicos (ver la tabla de roles).
+Parámetros configurables: umbrales de depreciación, multas, buffers de limpieza y demás reglas del negocio.
+Módulo 10 · CMS y Sitio Web Público
+La identidad de marca es un pilar de este negocio. El sitio web público se administra mediante un CMS que permite a la propietaria editar contenidos, imágenes y textos sin conocimientos técnicos. El sitio se estructura en cuatro secciones, descritas más adelante.
+Roles de usuario
+El sistema maneja tres perfiles. La restricción de accesos se aplica de acuerdo con el rol asignado a cada usuario.
+Rol
+Alcance principal
+Propietaria (Superadministrador)
+Acceso total: todas las sedes, configuración del negocio, reportes, módulo de auditoría, CMS y gestión de usuarios.
+Administrador de almacén
+Gestión de inventario, calendario, reservas, entregas y devoluciones de su sede.
+Asesora comercial
+Atención al cliente, creación de reservas, cobros y gestión de su cartera de clientes en el CRM.
+Sitio web y CMS
+El sitio web público se compone de un máximo de cuatro secciones, todas administrables desde el CMS por la propietaria:
+Inicio: presentación de la marca, identidad visual y colecciones destacadas.
+Colección: vitrina visual de las prendas disponibles, con fotografía de alta calidad.
+Experiencia: cómo funciona el alquiler, políticas, cuidado de las prendas y preguntas frecuentes.
+Contacto y Reserva: agendamiento de cita, ubicación de las sedes, canales de contacto y acceso al agente de IA.
+5. Propuesta Técnica y Tecnológica
+La solución se construye con tecnologías modernas, de alto rendimiento y con un costo de operación optimizado, priorizando la seguridad de la información en cada capa del sistema.
+Arquitectura general
+El sistema se implementa como una aplicación web progresiva (PWA) con renderizado híbrido, respaldada por servicios serverless y una base de datos PostgreSQL administrada. La arquitectura es modular: cada módulo funcional es independiente y se comunica a través de una capa de servicios común, lo que facilita el mantenimiento y la futura comercialización del producto.
+Capa
+Tecnología
+Función
+Presentación (Frontend)
+Next.js, React, TypeScript y Tailwind CSS
+Interfaz PWA responsive, instalable y con soporte offline.
+Lógica de negocio (Backend)
+Funciones serverless de Next.js sobre Node.js
+Reglas de negocio, API interna y orquestación de módulos.
+Datos
+Neon (PostgreSQL serverless) con Prisma ORM
+Persistencia, modelo multitenant y migraciones de base de datos.
+Almacenamiento de archivos
+Vercel Blob
+Imágenes y video HD de las prendas, y documentos.
+Infraestructura y despliegue
+Vercel
+Hosting, CDN global e integración y despliegue continuo.
+Inteligencia artificial
+API de modelo de lenguaje (LLM)
+Agente conversacional con acceso al catálogo y las políticas.
+PWA y diseño responsive
+La aplicación es 100% responsive y funciona como PWA: puede instalarse en el dispositivo, cargar con rapidez y operar con conectividad limitada. En computadores de escritorio la navegación se presenta mediante un menú lateral (sidebar); en dispositivos móviles ese menú se reemplaza por un menú hamburguesa, garantizando una experiencia fluida en cualquier tamaño de pantalla.
+Modelo multitenant y multisede
+Cada cuenta (tenant) se mantiene aislada lógicamente mediante un discriminador de inquilino en la base de datos, lo que garantiza que la información de un negocio nunca se cruce con la de otro. Dentro de una misma cuenta se pueden administrar múltiples sedes, cada una con su propio inventario, calendario y personal. Este diseño permite la futura comercialización del producto sin necesidad de reescribir el sistema.
+Seguridad de la información
+El desarrollo aplica buenas prácticas de seguridad en todas las capas del sistema:
+Control de acceso basado en roles (RBAC) con permisos granulares por módulo y acción.
+Autenticación segura y gestión controlada de sesiones.
+Cifrado de la información en tránsito (HTTPS) y en reposo.
+Bitácora de auditoría inmutable de las operaciones sensibles.
+Copias de seguridad automáticas y recuperación ante incidentes.
+Aislamiento de datos entre inquilinos (arquitectura multitenant).
+Integraciones
+Pasarela de pago: Wompi, recomendada por sus bajas comisiones, su API moderna y su integración nativa con Nequi y PSE. Compatible con alternativas como Mercado Pago o ePayco.
+Correo transaccional: Resend, para el envío automático de contratos y notificaciones.
+Mensajería WhatsApp (opcional): para el envío de notificaciones a través de la API de WhatsApp.
+Generación de documentos PDF: contratos de responsabilidad.
+Códigos QR: generación de un código único por prenda.
+6. Propuesta Económica
+El valor total del desarrollo de la plataforma es de $18.000.000 COP (dieciocho millones de pesos colombianos). Este valor no incluye impuestos.
+Qué incluye la inversión
+Diseño UX/UI y de la identidad visual de la aplicación.
+Desarrollo de los diez módulos funcionales descritos en esta propuesta.
+Arquitectura multitenant y multisede.
+Configuración de la PWA y diseño full responsive.
+Integración de pasarela de pago, punto de venta, correo transaccional y agente de IA.
+Pruebas, despliegue a producción y puesta en marcha.
+Capacitación al equipo de la clienta.
+Entrega del código fuente y propiedad total del software (marca blanca).
+Seis (6) meses de soporte posteriores a la entrega total.
+Forma de pago
+El pago se estructura en tres hitos a lo largo del proyecto:
+Hito
+Momento
+%
+Valor (COP)
+Anticipo
+A la firma de la propuesta / inicio del proyecto
+50%
+$9.000.000
+Entrega del MVP
+Entrega del Producto Mínimo Viable
+25%
+$4.500.000
+Entrega total
+Entrega final y puesta en producción
+25%
+$4.500.000
+Total
+
+100%
+$18.000.000
+Costos de infraestructura en la nube
+La plataforma opera sobre servicios en la nube facturados directamente por sus proveedores. Estos costos son de carácter operativo y recurrente, no están incluidos en el valor del desarrollo y corresponden a la clienta. Se recomienda que las cuentas se creen a nombre del negocio. Los valores se presentan en dólares (USD) y su equivalente aproximado en pesos, calculado con una TRM de referencia de $3.800 por dólar (mayo de 2026).
+Servicio
+Función
+USD / mes
+COP / mes (aprox.)
+Vercel (plan Pro)
+Hosting, CDN global, despliegues y funciones serverless
+USD 20
+$76.000
+Neon (plan Launch)
+Base de datos PostgreSQL serverless con Prisma
+USD 19
+$72.000
+Vercel Blob
+Almacenamiento de imágenes y video HD de las prendas
+USD 5
+$19.000
+Resend
+Correo transaccional (contratos y notificaciones)
+USD 0 – 20
+$0 – $76.000
+Agente de IA (API LLM)
+Consumo del agente conversacional
+USD 20
+$76.000
+Total mensual estimado
+
+USD 64 – 84
+$243.000 – $319.000
+
+Costo anual del dominio web:
+Servicio
+Función
+USD / año
+COP / año (aprox.)
+Dominio web (.com)
+Registro y renovación anual del dominio
+USD 15
+$57.000
+
+Notas sobre los costos de infraestructura:
+Prisma es la herramienta (ORM) que conecta la aplicación con la base de datos Neon; es de código abierto y no tiene costo: ya está incluida en el desarrollo.
+Resend ofrece un nivel gratuito de hasta 3.000 correos al mes; el costo solo aplica al superar ese límite.
+Neon (plan Launch) se factura por uso con un mínimo de USD 5 al mes; el valor estimado contempla un uso moderado en producción.
+El agente de IA tiene un costo variable según el volumen de conversaciones atendidas.
+La mensajería por WhatsApp, de activarse, tiene un costo por conversación facturado por Meta, no incluido en esta estimación.
+Las comisiones por transacción de la pasarela de pago son asumidas por el negocio y las descuenta el proveedor de cada pago.
+Durante la etapa de desarrollo el proveedor asume los entornos de desarrollo y pruebas; los costos operativos aquí descritos aplican una vez la plataforma entra en producción.
+7. Cronograma de Desarrollo
+El desarrollo se ejecuta en un plazo de dos (2) meses, organizado en cuatro fases. El Producto Mínimo Viable (MVP) se entrega al cierre de la fase 3 y la entrega total al cierre de la fase 4.
+Fase
+Semanas
+Actividades
+Entregable
+Fase 1 — Descubrimiento y diseño
+1 – 2
+Levantamiento detallado, diseño UX/UI, identidad visual, arquitectura técnica y configuración de entornos.
+Diseños aprobados y arquitectura definida.
+Fase 2 — Núcleo operativo
+3 – 4
+Inventario y ciclo de vida, calendario visual, reservas, roles, multitenant y multisede.
+Núcleo operativo funcional.
+Fase 3 — MVP
+5
+Integración, estabilización y pruebas del núcleo operativo.
+Entrega del MVP — hito de pago 25%.
+Fase 4 — Módulos complementarios y cierre
+6 – 8
+Pagos, POS y contratos, notificaciones y multas, autogestión QR, CRM, agente de IA, CMS, QA final, despliegue y capacitación.
+Entrega total y puesta en producción — hito de pago 25%.
+8. Soporte, Garantía y Marca Blanca
+Soporte incluido (6 meses)
+La propuesta incluye seis (6) meses de soporte a partir de la entrega total, sin costo adicional. El soporte contempla:
+Corrección de errores y fallos del software (garantía).
+Ajustes menores y acompañamiento en el uso de la plataforma.
+Monitoreo del correcto funcionamiento en producción.
+Atención a consultas del equipo de la clienta.
+El soporte no contempla el desarrollo de nuevos módulos o funcionalidades distintas a las descritas en esta propuesta; estos pueden cotizarse por separado.
+Entrega en marca blanca
+El producto se entrega en marca blanca, sin marca ni referencia del proveedor. La clienta recibe el código fuente completo y la propiedad total del software, lo que le permite operarlo, modificarlo y, si así lo desea, comercializarlo en el futuro.
+9. Supuestos, Exclusiones y Condiciones
+Exclusiones
+El valor del desarrollo no incluye impuestos.
+No incluye los costos operativos de infraestructura en la nube (Vercel, Neon, Vercel Blob, dominio, agente de IA y correo), que son recurrentes y corresponden a la clienta.
+No incluye las comisiones por transacción de la pasarela de pago.
+No incluye los costos por conversación de la API de WhatsApp, en caso de activarse.
+No incluye la producción de contenido: fotografía profesional de las prendas, textos de marca ni material audiovisual.
+No incluye hardware para el punto de venta (computador, lector de códigos, impresora).
+No incluye licencias de terceros distintas a las descritas en esta propuesta.
+Condiciones
+El inicio del desarrollo está sujeto al pago del anticipo del 50%.
+La clienta designará un punto de contacto para la validación de avances y la entrega de información del negocio.
+Los tiempos del cronograma suponen la entrega oportuna de contenidos, accesos y aprobaciones por parte de la clienta.
+Esta propuesta tiene una validez de 30 días a partir de su fecha de emisión.
+10. Aceptación de la Propuesta
+Si la presente propuesta es de su conformidad, agradezco su aprobación para dar inicio al proyecto. La firma de este documento constituye la aceptación de su alcance, valor y condiciones.
+
+
+Por el proveedor
+César Andrés Lozano Pulido
+Ingeniero de Sistemas
+
+Por la clienta
+María Paula Orejuela
+Propietaria del negocio
+
+Contacto
+César Andrés Lozano Pulido
+Ingeniero de Sistemas · Especialista en Seguridad de la Información · Analista de Datos certificado por Google
+Buga, Valle del Cauca
+Teléfono y WhatsApp:  316 498 4843
+Correo:  cesarandres.lopu@gmail.com

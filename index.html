@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VÉSTIER - Luxury Rentals Platform</title>
+  <!-- Google Fonts: Playfair Display for headers & Plus Jakarta Sans for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for modern aesthetic -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Core custom styles -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Mobile Hamburger Toggle -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <!-- Mobile overlay backdrop -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- LEFT SIDEBAR: Admin & Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <i class="fa-solid fa-crown gold-icon"></i>
+          <h1>VÉSTIER</h1>
+        </div>
+        <p class="logo-subtitle">LUXURY RENTALS</p>
+      </div>
+
+      <!-- Quick Roles and Sedes controls (RBAC & Multisede proof of concept) -->
+      <div class="sidebar-controls">
+        <div class="control-group">
+          <label><i class="fa-solid fa-store"></i> Sede</label>
+          <select id="sede-selector">
+            <option value="cali">Cali - Av. 6 Oeste</option>
+            <option value="buga">Buga - Centro Histórico</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label><i class="fa-solid fa-user-shield"></i> Perfil Rol</label>
+          <select id="role-selector">
+            <option value="propietaria">Propietaria (SuperAdmin)</option>
+            <option value="asesora">Asesora Comercial</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Nav Menu -->
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-tab="dashboard">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="menu-item" data-tab="inventory">
+          <i class="fa-solid fa-tags"></i>
+          <span>Inventario Inteligente</span>
+        </button>
+        <button class="menu-item" data-tab="calendar">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Calendario Visual</span>
+        </button>
+        <button class="menu-item" data-tab="crm">
+          <i class="fa-solid fa-users-viewfinder"></i>
+          <span>CRM &amp; VIP Scoring</span>
+        </button>
+        <button class="menu-item" data-tab="pos">
+          <i class="fa-solid fa-cash-register"></i>
+          <span>POS &amp; Caja</span>
+        </button>
+      </nav>
+
+      <!-- User footer profile -->
+      <div class="sidebar-footer">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop" alt="César Lozano" class="user-avatar">
+        <div class="user-info">
+          <h4 id="user-display-name">María Paula O.</h4>
+          <p id="user-display-role">Propietaria</p>
+        </div>
+        <i class="fa-solid fa-circle-check online-status"></i>
+      </div>
+    </aside>
+
+    <!-- CENTER & RIGHT: Main interactive panel -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="topbar">
+        <div class="topbar-welcome">
+          <span class="date-badge" id="current-date">Cali, 21 de Mayo de 2026</span>
+          <h2 id="topbar-title">Operaciones de Lujo</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-secondary btn-icon" id="btn-quick-audit" title="Ver Bitácora Completa">
+            <i class="fa-solid fa-receipt"></i>
+          </button>
+          <button class="btn btn-secondary btn-icon" id="btn-notifications" title="Notificaciones Pendientes">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot"></span>
+          </button>
+          <button class="btn btn-primary" id="btn-new-rental">
+            <i class="fa-solid fa-plus"></i> Nuevo Alquiler
+          </button>
+        </div>
+      </header>
+
+      <!-- Primary dynamic viewport -->
+      <div class="viewport" id="viewport">
+        
+        <!-- ================= DASHBOARD TAB ================= -->
+        <section class="tab-pane active" id="tab-dashboard">
+          <div class="dashboard-grid">
+            <!-- Stats Row -->
+            <div class="stat-card">
+              <div class="stat-icon-wrapper success"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+              <div class="stat-data">
+                <span class="stat-label">Ingresos del Mes</span>
+                <span class="stat-value" id="stat-revenue">$11.850.000 COP</span>
+                <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +12% vs meta</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon-wrapper primary"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <div class="stat-data">
+                <span class="stat-label">Alquileres Activos</span>
+                <span class="stat-value" id="stat-active-rentals">8</span>
+                <span class="stat-trend"><i class="fa-solid fa-vest"></i> En tránsito / uso</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper warning"><i class="fa-solid fa-soap"></i></div>
+              <div class="stat-data">
+                <span class="stat-label">En Limpieza / Buffer</span>
+                <span class="stat-value" id="stat-cleaning">3</span>
+                <span class="stat-trend warning-trend"><i class="fa-solid fa-circle-exclamation"></i> Listo en &lt;24h</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper info"><i class="fa-solid fa-shield-heart"></i></div>
+              <div class="stat-data">
+                <span class="stat-label">Tasa de Cuidado</span>
+                <span class="stat-value">98.4%</span>
+                <span class="stat-trend positive"><i class="fa-solid fa-thumbs-up"></i> Categoría A+ / A</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mid Dashboard Layout: Visual Chart / Top Rentables -->
+          <div class="grid-two-cols">
+            <!-- SVG custom beautiful visual stats -->
+            <div class="card panel-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-simple"></i> Desempeño Operativo por Sede</h3>
+                <span class="card-subtitle">Rentabilidad e histórico acumulado de alquileres</span>
+              </div>
+              <div class="card-body chart-container">
+                <div class="custom-bar-chart">
+                  <div class="chart-y-axis">
+                    <span>$10M</span>
+                    <span>$5M</span>
+                    <span>$0</span>
+                  </div>
+                  <div class="chart-bars">
+                    <div class="bar-group">
+                      <div class="bar-bar" style="height: 85%;">
+                        <span class="bar-tooltip">$12.500.000 (Cali)</span>
+                      </div>
+                      <span class="bar-label">Cali - Boutique</span>
+                    </div>
+                    <div class="bar-group">
+                      <div class="bar-bar secondary-bar" style="height: 48%;">
+                        <span class="bar-tooltip">$5.500.000 (Buga)</span>
+                      </div>
+                      <span class="bar-label">Buga - Histórico</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-legend">
+                  <span class="legend-item"><span class="legend-dot cali"></span> Sede Cali</span>
+                  <span class="legend-item"><span class="legend-dot buga"></span> Sede Buga</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top dresses performance table -->
+            <div class="card panel-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-star gold-icon"></i> Rentabilidad Top (CPW)</h3>
+                <span class="card-subtitle">Prendas con mejor Costo por Uso y retorno</span>
+              </div>
+              <div class="card-body no-padding">
+                <table class="luxury-table">
+                  <thead>
+                    <tr>
+                      <th>Prenda</th>
+                      <th>Marca</th>
+                      <th>Alquileres</th>
+                      <th>Ingresos</th>
+                      <th>CPW (Costo/Uso)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top-dresses-tbody">
+                    <!-- Dynamic rendering in JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= INVENTORY TAB ================= -->
+        <section class="tab-pane" id="tab-inventory">
+          <div class="inventory-controls">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="inventory-search" placeholder="Buscar por marca, modelo, código o talla...">
+            </div>
+            <div class="filters">
+              <select id="filter-brand">
+                <option value="all">Todas las marcas</option>
+                <option value="Dolce & Gabbana">Dolce & Gabbana</option>
+                <option value="Louis Vuitton">Louis Vuitton</option>
+                <option value="Versace">Versace</option>
+                <option value="Silvia Tcherassi">Silvia Tcherassi</option>
+              </select>
+              <select id="filter-status">
+                <option value="all">Todos los estados</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Alquilada">Alquilada</option>
+                <option value="En Limpieza">En Limpieza</option>
+                <option value="En Tránsito">En Tránsito</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Elegant grid of luxury dresses -->
+          <div class="dresses-grid" id="dresses-grid">
+            <!-- Dynamic clothing cards rendered in JS -->
+          </div>
+        </section>
+
+        <!-- ================= CALENDAR TAB ================= -->
+        <section class="tab-pane" id="tab-calendar">
+          <div class="calendar-wrapper">
+            <div class="calendar-header-actions">
+              <div class="calendar-nav">
+                <button class="btn btn-secondary btn-icon" id="btn-prev-month"><i class="fa-solid fa-chevron-left"></i></button>
+                <h3 id="calendar-month-year">Mayo de 2026</h3>
+                <button class="btn btn-secondary btn-icon" id="btn-next-month"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+              <div class="calendar-indicators">
+                <span class="indicator"><span class="color-box available"></span> Disponible</span>
+                <span class="indicator"><span class="color-box rented"></span> Alquilado / Reservado</span>
+                <span class="indicator"><span class="color-box buffer"></span> Buffer Limpieza</span>
+              </div>
+            </div>
+            
+            <div class="calendar-grid-container">
+              <div class="calendar-weekdays">
+                <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+              </div>
+              <div class="calendar-days" id="calendar-days">
+                <!-- Dynamic calendar days -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= CRM TAB ================= -->
+        <section class="tab-pane" id="tab-crm">
+          <div class="crm-container">
+            <div class="crm-sidebar-list">
+              <div class="crm-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="crm-search-input" placeholder="Buscar clienta...">
+              </div>
+              <div class="customer-list-nodes" id="customer-list-nodes">
+                <!-- Dynamic clients in JS -->
+              </div>
+            </div>
+            
+            <div class="crm-detail-view" id="crm-detail-view">
+              <!-- Rendered detail in JS -->
+              <div class="empty-state">
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <p>Selecciona una clienta para ver su Ficha 360°, tallas, nivel VIP y exclusividad de prendas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= POS TAB ================= -->
+        <section class="tab-pane" id="tab-pos">
+          <div class="pos-grid">
+            <!-- Selection & Details Panel -->
+            <div class="pos-input-panel">
+              <div class="card panel-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-file-invoice-dollar"></i> Crear Alquiler en Caja</h3>
+                  <span class="card-subtitle">Registrar cliente, prenda y firmar contrato digital</span>
+                </div>
+                <div class="card-body">
+                  <form id="pos-rental-form" class="luxury-form">
+                    <div class="form-row">
+                      <div class="form-group col-12">
+                        <label for="pos-select-customer">Seleccionar Clienta</label>
+                        <select id="pos-select-customer" required>
+                          <option value="">-- Selecciona una clienta --</option>
+                          <!-- Dynamic options in JS -->
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="form-row">
+                      <div class="form-group col-12">
+                        <label for="pos-select-dress">Seleccionar Prenda Exclusiva</label>
+                        <select id="pos-select-dress" required>
+                          <option value="">-- Selecciona una prenda --</option>
+                          <!-- Dynamic options in JS -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-row two-cols">
+                      <div class="form-group">
+                        <label for="pos-start-date">Fecha de Salida</label>
+                        <input type="date" id="pos-start-date" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="pos-end-date">Fecha de Entrega</label>
+                        <input type="date" id="pos-end-date" required>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-12">
+                        <label>Pasarela Integrada de Pago</label>
+                        <div class="payment-methods-grid">
+                          <label class="pay-method-card active">
+                            <input type="radio" name="pay-method" value="wompi" checked>
+                            <img src="https://lh3.googleusercontent.com/proxy/4l9U8_R_iQ67fT5jV1Y3DkZlyW1N0q6mRz6dI6u1i5t1c3o6P1v2s7t7j2P" alt="Wompi" class="pay-logo-fallback" style="display:none;">
+                            <span><i class="fa-solid fa-wallet"></i> Wompi / PSE</span>
+                          </label>
+                          <label class="pay-method-card">
+                            <input type="radio" name="pay-method" value="nequi">
+                            <span><i class="fa-solid fa-mobile-screen"></i> Nequi directo</span>
+                          </label>
+                          <label class="pay-method-card">
+                            <input type="radio" name="pay-method" value="efectivo">
+                            <span><i class="fa-solid fa-money-bill-wave"></i> Efectivo / Caja</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-row" id="exclusivity-alert-pos" style="display:none;">
+                      <div class="alert alert-danger">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span><strong>Restricción VIP:</strong> Esta prenda A+ (Editorial) está reservada exclusivamente para clientelas VIP.</span>
+                      </div>
+                    </div>
+
+                    <!-- Contract Generator preview and active signature pad -->
+                    <div class="contract-container" id="contract-area" style="display: none;">
+                      <h4 class="contract-header"><i class="fa-solid fa-file-contract"></i> Contrato de Responsabilidad Civil y Alquiler</h4>
+                      <div class="contract-text-scroll" id="contract-text-body">
+                        <!-- Dynamic text generated in JS -->
+                      </div>
+                      
+                      <!-- Drawing canvas for digital signature -->
+                      <div class="signature-canvas-wrapper">
+                        <label><i class="fa-solid fa-signature"></i> Firma del Cliente (Dibujar con mouse o táctil)</label>
+                        <canvas id="signature-canvas" width="400" height="150"></canvas>
+                        <div class="signature-actions">
+                          <button type="button" class="btn btn-secondary btn-small" id="btn-clear-sig">Limpiar</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="pos-actions">
+                      <button type="button" class="btn btn-secondary" id="btn-pos-calculate" disabled>Calcular Valores</button>
+                      <button type="submit" class="btn btn-primary" id="btn-pos-submit" disabled>Confirmar y Registrar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Receipt & Summary Panel -->
+            <div class="pos-receipt-panel">
+              <div class="card panel-card dark-card">
+                <div class="card-header border-gold">
+                  <h3><i class="fa-solid fa-receipt"></i> Resumen de Cuenta</h3>
+                  <span class="card-subtitle white-text">Detalle de valores del alquiler activo</span>
+                </div>
+                <div class="card-body" id="pos-summary-body">
+                  <div class="empty-receipt">
+                    <i class="fa-solid fa-receipt"></i>
+                    <p>Completa los datos del formulario y calcula los valores para ver el desglose económico.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- INMUTABLE AUDIT TRAIL LOG (Always showing at bottom for trust and trace) -->
+      <footer class="audit-trail-footer">
+        <div class="audit-header">
+          <h4><i class="fa-solid fa-timeline"></i> Bitácora de Auditoría Inmutable (Módulo 8 - RBAC)</h4>
+          <span class="audit-badge">Multitenant Activo</span>
+        </div>
+        <div class="audit-logs-viewport" id="audit-logs-viewport">
+          <!-- Live audit logs pushed in real-time -->
+        </div>
+      </footer>
+    </main>
+
+    <!-- RIGHT PANEL: Client Mobile Phone simulator & AI assistant -->
+    <aside class="right-panel">
+      <!-- Simulated smartphone framework for PWA & QR Scanning demonstration -->
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <!-- Mobile Screen Header -->
+          <div class="phone-header">
+            <span class="phone-time">08:32 AM</span>
+            <div class="phone-status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-three-quarters"></i>
+            </div>
+          </div>
+          
+          <!-- Mobile Dynamic Screen Body -->
+          <div class="phone-body" id="phone-body">
+            <!-- Public Portal view default -->
+            <div class="phone-pwa-view" id="phone-pwa-home">
+              <div class="phone-pwa-navbar">
+                <span class="phone-brand">VÉSTIER Luxury</span>
+                <button class="phone-menu-btn" id="phone-qr-scan-btn" title="Simular Escanear Código QR">
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+              </div>
+              
+              <div class="phone-hero">
+                <p>Alquiler de vestidos de alta costura para eventos exclusivos en Cali</p>
+                <div class="phone-tagline">Exclusividad · Alta Moda · QR Directo</div>
+              </div>
+              
+              <div class="phone-content">
+                <h4>Colección Destacada</h4>
+                <div class="phone-mini-catalog" id="phone-mini-catalog">
+                  <!-- Renders top dresses in mobile format -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Simulated QR camera scanning action screen -->
+            <div class="phone-pwa-view" id="phone-pwa-scanner" style="display: none;">
+              <div class="phone-scanner-overlay">
+                <div class="scanner-aim-box"></div>
+                <p class="scanner-text">Apunte la cámara al código QR de la prenda</p>
+                <button class="btn btn-secondary btn-small" id="btn-cancel-scan">Cancelar</button>
+              </div>
+              <!-- Flashes green when scan succeeds -->
+            </div>
+
+            <!-- Public product detailed page (shown after scanning a dress's QR or clicking details) -->
+            <div class="phone-pwa-view" id="phone-pwa-product" style="display: none;">
+              <div class="phone-pwa-navbar">
+                <button class="phone-back-btn" id="phone-product-back"><i class="fa-solid fa-arrow-left"></i></button>
+                <span class="phone-brand" id="phone-product-title">Dolce &amp; Gabbana</span>
+              </div>
+              <div class="phone-product-scroll">
+                <div class="phone-product-image-wrapper">
+                  <img id="phone-product-img" src="" alt="Prenda">
+                  <span class="phone-product-quality" id="phone-product-quality">A+</span>
+                </div>
+                <div class="phone-product-details">
+                  <h3 id="phone-product-name">Floral Silk Gown</h3>
+                  <div class="phone-product-price-box">
+                    <span class="phone-price" id="phone-product-price">$350.000 / 3 días</span>
+                    <span class="phone-status-badge available" id="phone-product-status">Disponible</span>
+                  </div>
+                  
+                  <div class="phone-divider"></div>
+                  
+                  <div class="phone-info-row">
+                    <span><strong>Talla:</strong> <span id="phone-product-size">S (6)</span></span>
+                    <span><strong>Material:</strong> 100% Seda Natural</span>
+                  </div>
+
+                  <div class="phone-divider"></div>
+
+                  <h4>Próxima disponibilidad</h4>
+                  <div class="phone-calendar-strip" id="phone-product-avail">
+                    <!-- Dynamic mini calendar strip -->
+                  </div>
+
+                  <div class="phone-actions">
+                    <a href="#" class="phone-btn phone-btn-whatsapp" id="phone-whatsapp-link">
+                      <i class="fa-brands fa-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="phone-home-indicator"></div>
+      </div>
+
+      <!-- AI ASSISTANT PANEL: Simulated IA agent conversation ("Celia") -->
+      <div class="ai-widget-card">
+        <div class="ai-header">
+          <div class="ai-bot-avatar">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span class="online-indicator"></span>
+          </div>
+          <div class="ai-title-group">
+            <h4>Celia · IA Estilista</h4>
+            <p>Agente Virtual de VÉSTIER</p>
+          </div>
+          <button class="ai-info-btn" title="Políticas de IA"><i class="fa-solid fa-circle-info"></i></button>
+        </div>
+        
+        <div class="ai-chat-body" id="ai-chat-body">
+          <div class="ai-message bot">
+            <p>¡Hola! Soy Celia, tu agente de inteligencia artificial de VÉSTIER. Te ayudo con recomendaciones de estilo, disponibilidad del catálogo o dudas sobre políticas de alquiler. ¿En qué te puedo asesorar hoy?</p>
+          </div>
+        </div>
+        
+        <!-- Quick chat option buttons (to bypass writing long queries) -->
+        <div class="ai-quick-options">
+          <button class="btn-quick-ask" data-query="¿Qué vestidos están disponibles hoy?">Ver disponibles hoy</button>
+          <button class="btn-quick-ask" data-query="¿Cuál es la política de entrega tardía?">Política de multas</button>
+          <button class="btn-quick-ask" data-query="¿Cuál es el vestido más rentable?">Prenda más rentable</button>
+        </div>
+
+        <form class="ai-chat-input-area" id="ai-chat-form">
+          <input type="text" id="ai-chat-input" placeholder="Pregunta a Celia sobre disponibilidad, tallas..." required autocomplete="off">
+          <button type="submit" class="btn btn-primary btn-icon"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- CORE JS APP APPLICATION -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

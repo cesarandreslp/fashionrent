@@ -1,0 +1,96 @@
+# Plan de Implementación: VÉSTIER Luxury Rentals Demo
+
+Este documento describe el diseño, arquitectura y plan de desarrollo para el prototipo interactivo de ventas de **VÉSTIER Luxury Rentals**, una plataforma premium para el alquiler de prendas de alta costura, diseñada para digitalizar la operación de la clienta María Paula Orejuela en Santiago de Cali.
+
+El objetivo principal es crear una experiencia visual y funcional de alta fidelidad, con estética de lujo (paleta de colores negro obsidiana, oro champaña y blanco mármol, tipografía elegante y micro-animaciones) que demuestre de forma tangible la viabilidad técnica y el valor operativo de la cotización presentada.
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> El demo está diseñado como una **Single Page Application (SPA)** autocontenida de alta fidelidad, utilizando HTML5, CSS3 personalizado de nivel premium (sin Tailwind para control absoluto de la estética y animaciones de marca) y Vanilla JavaScript.
+> Para la ejecución y visualización local, se configurará un servidor de desarrollo rápido utilizando `Vite`. Esto permitirá cargar las imágenes generadas por IA y simular la interactividad sin necesidad de bases de datos reales o APIs de pago complejas, ideal para la presentación comercial presencial o virtual.
+
+> [!TIP]
+> Para lograr el máximo impacto visual en la venta, se incorporaron los recursos visuales de alta costura generados por IA para cada una de las marcas mencionadas en la propuesta (Dolce & Gabbana, Louis Vuitton, Versace y Silvia Tcherassi).
+
+---
+
+## Proposed Changes
+
+Las actividades y archivos propuestos se estructuran en la carpeta del espacio de trabajo `c:\Projects\fashionrent`.
+
+### 1. Configuración del Entorno y Estructura Base
+
+#### [NEW] [package.json](file:///c:/Projects/fashionrent/package.json)
+Configuración de dependencias de desarrollo utilizando **Vite** para servir la aplicación con recarga en tiempo real y soporte fluido de módulos ES6 y activos estáticos.
+
+#### [NEW] [index.html](file:///c:/Projects/fashionrent/index.html)
+Estructura base de la aplicación. Contendrá la navegación principal en barra lateral (sidebar) de lujo, el área de contenido dinámico (viewport) y un contenedor flotante para la simulación del portal móvil del cliente (PWA con escáner QR).
+
+#### [NEW] [styles.css](file:///c:/Projects/fashionrent/styles.css)
+Sistema de diseño y hojas de estilo premium. Implementa la paleta de colores de lujo, tipografías desde Google Fonts, clases de vidrio esmerilado (glassmorphism), sombras suaves, y micro-animaciones interactivas para una experiencia premium "viva".
+
+#### [NEW] [app.js](file:///c:/Projects/fashionrent/app.js)
+Lógica e interactividad de la plataforma. Controlará el estado del inventario, la simulación de reservas con buffers de limpieza automática, la bitácora de auditoría inmutable en tiempo real, el CRM de clientes VIP, el punto de venta (POS) con panel de firma interactivo, y el agente conversacional de IA.
+
+---
+
+## Detalle de Módulos a Demostrar
+
+### Módulo 1: Inventario Inteligente y Ciclo de Vida
+*   **Ficha Única**: Visualización de prendas de marcas reales (D&G, Louis Vuitton, Versace, Silvia Tcherassi) con sus imágenes correspondientes generadas por IA.
+*   **Estados Operativos**: Cambio de estados en tiempo real (Disponible, Alquilado, En Limpieza, etc.).
+*   **Clasificación de Calidad y Depreciación**: Visualización del nivel de calidad (A+ a C) y barra de desgaste automática que se desgasta de forma lógica con cada simulación de alquiler.
+*   **Rentabilidad y CPW**: Indicadores numéricos vivos del costo por uso (CPW) y retorno de inversión de cada vestido.
+*   **Acciones**: Botón de ver código QR que puede ser "escaneado" directamente en el simulador móvil integrado.
+
+### Módulo 2: Calendario Visual y Reservas
+*   **Calendario del Mes**: Visualización en cuadrícula mensual dinámica.
+*   **Buffers de Limpieza**: Bloqueo automático interactivo de 24/48 horas posteriores a una reserva simulada.
+*   **Creación de Reservas**: Formulario modal para seleccionar vestido, cliente, rango de fechas y generar la reserva al instante.
+
+### Módulo 3: Autogestión y QR (Simulador Móvil PWA)
+*   **Marco de Smartphone**: Un widget en pantalla que simula la interfaz móvil del cliente.
+*   **Escáner QR Interactivo**: Al hacer clic en el botón QR de cualquier prenda en el inventario, la cámara simulada del teléfono lo "escanea" y despliega instantáneamente el micrositio de la prenda con detalles y formulario rápido de WhatsApp.
+
+### Módulo 4: POS y Contrato Automático de Responsabilidad
+*   **Checkout Premium**: Pasarela simulada unificada (simulación de pagos con Wompi, PSE, Nequi y Tarjeta).
+*   **Generador de Contratos**: Visualización de un contrato formal en PDF simulado con las características exactas del alquiler.
+*   **Firma Electrónica Activa**: Un lienzo de dibujo HTML5 (Canvas) donde el usuario puede firmar con el ratón o el dedo en tiempo real para autorizar y cerrar el alquiler.
+
+### Módulo 6: CRM y Scoring VIP
+*   **Ficha de Cliente**: Perfiles de clientas exclusivas de Cali.
+*   **Niveles VIP y Reglas**: Reglas de exclusividad visibles (las clientas con scoring estándar tienen bloqueados los vestidos categoría A+ / Editorial, reservados exclusivamente para clientas VIP).
+
+### Módulo 7: Agente de IA (Asistente "Celia")
+*   **Chatbot Integrado**: Interfaz de chat premium con Celia, la estilista virtual.
+*   **Respuestas Inteligentes**: Respuestas automáticas dinámicas basadas en las políticas de la propuesta (tiempo de gracia, depósitos de garantía, entrega en Buga/Cali, etc.) y en el estado real del inventario del demo.
+
+### Módulo 8: Auditoría y Trazabilidad Inmutable
+*   **Bitácora Viva**: Sección inferior que registra con marca de tiempo cada acción realizada en el demo (ej. *"Asesora registró alquiler de Vestido LV a María Claudia P."*, *"Sistema bloqueó 24h por buffer de limpieza"*).
+
+---
+
+## Verification Plan
+
+### Pruebas Automatizadas y de Servidor
+*   Lanzamiento del servidor de desarrollo con `npm run dev` (Vite) para validar la correcta resolución de rutas, compilación de estilos CSS y visualización de recursos estáticos.
+*   Verificación en consola de navegación de la inmutabilidad de los datos de sesión y consistencia del estado de la aplicación.
+
+### Verificación Manual
+*   **Flujo Completo de Alquiler**:
+    1.  Ir al módulo **POS**, seleccionar clienta "VIP" y vestido "Dolce & Gabbana".
+    2.  Simular el pago interactivo.
+    3.  Firmar en el panel de firma interactiva y hacer clic en "Finalizar Alquiler".
+    4.  Verificar que el vestido cambia a estado **Alquilado** en el Inventario y su contador de alquileres aumenta.
+    5.  Verificar que se genera el registro en la **Bitácora de Auditoría**.
+    6.  Revisar en el **Calendario** que las fechas seleccionadas y el respectivo buffer de limpieza queden marcados visualmente.
+*   **Simulación QR**:
+    1.  En la lista del inventario, pulsar el icono de código QR de la prenda Silvia Tcherassi.
+    2.  Ver en el simulador móvil cómo se escanea y se despliega la ficha pública de la prenda al instante.
+*   **Prueba de Exclusividad CRM**:
+    1.  Intentar realizar un alquiler de un vestido categoría A+ a una clienta de nivel regular y validar que el sistema notifique la restricción de exclusividad.
+*   **Interacción con la IA**:
+    1.  Escribir al chatbot "¿Cuáles son las políticas de devolución tardía?" o seleccionar un atajo de pregunta y validar la respuesta detallada.
