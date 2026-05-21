@@ -107,36 +107,43 @@ let signatureSigned = false;
 let currentCalendarDate = new Date(2026, 4, 1);
 
 // ══════════════════════════════════════════════════
-// LANDING PAGE & ROLE SELECTION
+// INITIALIZATION & ROLE SELECTION
 // ══════════════════════════════════════════════════
-function setupLanding() {
-  $$('.role-card').forEach(card => {
-    const enterBtn = card.querySelector('.role-enter-btn');
-    const role = card.dataset.role;
+function setupApp() {
+  initClientPortal();
 
-    card.addEventListener('click', () => enterRole(role));
-    enterBtn.addEventListener('click', (e) => { e.stopPropagation(); enterRole(role); });
+  $('btn-staff-login').addEventListener('click', () => {
+    $('staff-modal').style.display = 'flex';
+  });
+
+  $('staff-modal-close').addEventListener('click', () => {
+    $('staff-modal').style.display = 'none';
+  });
+
+  $('staff-modal').addEventListener('click', (e) => {
+    if (e.target === $('staff-modal')) $('staff-modal').style.display = 'none';
+  });
+
+  $$('.role-card-modal').forEach(card => {
+    card.addEventListener('click', () => {
+      const role = card.dataset.role;
+      $('staff-modal').style.display = 'none';
+      enterRole(role);
+    });
   });
 }
 
 function enterRole(role) {
   state.activeRole = role;
-  $('landing-screen').style.display = 'none';
-
-  if (role === 'cliente') {
-    $('client-portal').style.display = 'block';
-    initClientPortal();
-  } else {
-    $('app-container').style.display = 'grid';
-    initAdminApp(role);
-  }
+  $('client-portal').style.display = 'none';
+  $('app-container').style.display = 'grid';
+  initAdminApp(role);
 }
 
 function logout() {
   state.activeRole = null;
   $('app-container').style.display = 'none';
-  $('client-portal').style.display = 'none';
-  $('landing-screen').style.display = 'flex';
+  $('client-portal').style.display = 'block';
 }
 
 // ══════════════════════════════════════════════════
@@ -728,8 +735,6 @@ function handleAi(query) {
 function initClientPortal() {
   renderClientCatalog();
 
-  $('btn-logout-client').addEventListener('click', logout);
-
   $('client-qr-btn').addEventListener('click', () => {
     $('client-scanner').style.display = 'flex';
     setTimeout(() => {
@@ -808,4 +813,4 @@ function showClientProduct(id) {
 // ══════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', setupLanding);
+document.addEventListener('DOMContentLoaded', setupApp);

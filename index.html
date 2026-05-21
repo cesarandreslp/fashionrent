@@ -13,74 +13,34 @@
 <body>
 
   <!-- ============================================================
-       LANDING PAGE: Role Selection
+       STAFF LOGIN MODAL (hidden by default)
        ============================================================ -->
-  <div class="landing-screen" id="landing-screen">
-    <div class="landing-bg-overlay"></div>
-    <div class="landing-content">
-      <div class="landing-brand">
-        <i class="fa-solid fa-crown landing-crown"></i>
-        <h1>VÉSTIER</h1>
-        <p class="landing-subtitle">LUXURY RENTALS</p>
-        <p class="landing-tagline">Plataforma exclusiva de alquiler de alta costura para eventos en Santiago de Cali</p>
+  <div class="modal-overlay" id="staff-modal" style="display:none;">
+    <div class="modal-card">
+      <button class="modal-close" id="staff-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <i class="fa-solid fa-lock gold-icon"></i>
+        <h3>Acceso Administrativo</h3>
+        <p>Ingresa con tu perfil de equipo VÉSTIER</p>
       </div>
-
-      <h2 class="landing-prompt">Selecciona tu perfil para ingresar</h2>
-
-      <div class="role-cards">
-        <!-- Propietaria -->
-        <div class="role-card" data-role="propietaria">
-          <div class="role-icon-wrapper">
-            <i class="fa-solid fa-gem"></i>
+      <div class="role-cards-modal">
+        <div class="role-card-modal" data-role="propietaria">
+          <div class="role-icon-wrapper"><i class="fa-solid fa-gem"></i></div>
+          <div>
+            <h4>Propietaria</h4>
+            <p>María Paula Orejuela &mdash; Acceso completo</p>
           </div>
-          <h3>Propietaria</h3>
-          <p class="role-name">María Paula Orejuela</p>
-          <ul class="role-perks">
-            <li><i class="fa-solid fa-check"></i> Dashboard financiero completo</li>
-            <li><i class="fa-solid fa-check"></i> Inventario y rentabilidad</li>
-            <li><i class="fa-solid fa-check"></i> CRM, Calendario y POS</li>
-            <li><i class="fa-solid fa-check"></i> Bitácora de auditoría</li>
-            <li><i class="fa-solid fa-check"></i> Agente IA Celia</li>
-          </ul>
-          <button class="btn btn-primary role-enter-btn">Ingresar <i class="fa-solid fa-arrow-right"></i></button>
+          <i class="fa-solid fa-arrow-right"></i>
         </div>
-
-        <!-- Asesora -->
-        <div class="role-card" data-role="asesora">
-          <div class="role-icon-wrapper secondary">
-            <i class="fa-solid fa-headset"></i>
+        <div class="role-card-modal" data-role="asesora">
+          <div class="role-icon-wrapper secondary"><i class="fa-solid fa-headset"></i></div>
+          <div>
+            <h4>Asesora Comercial</h4>
+            <p>Equipo Operativo &mdash; Inventario, CRM, POS</p>
           </div>
-          <h3>Asesora Comercial</h3>
-          <p class="role-name">Equipo Operativo Cali</p>
-          <ul class="role-perks">
-            <li><i class="fa-solid fa-check"></i> Inventario y disponibilidad</li>
-            <li><i class="fa-solid fa-check"></i> Calendario de reservas</li>
-            <li><i class="fa-solid fa-check"></i> POS y registro de alquileres</li>
-            <li><i class="fa-solid fa-check"></i> CRM de clientas</li>
-            <li><i class="fa-solid fa-lock"></i> <span class="muted">Dashboard financiero</span></li>
-          </ul>
-          <button class="btn btn-secondary role-enter-btn">Ingresar <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-        <!-- Cliente -->
-        <div class="role-card" data-role="cliente">
-          <div class="role-icon-wrapper tertiary">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-          </div>
-          <h3>Clienta VIP</h3>
-          <p class="role-name">Portal Público de Autogestión</p>
-          <ul class="role-perks">
-            <li><i class="fa-solid fa-check"></i> Catálogo de prendas exclusivas</li>
-            <li><i class="fa-solid fa-check"></i> Escaneo QR de etiquetas</li>
-            <li><i class="fa-solid fa-check"></i> Reserva directa por WhatsApp</li>
-            <li><i class="fa-solid fa-check"></i> Disponibilidad en tiempo real</li>
-            <li><i class="fa-solid fa-lock"></i> <span class="muted">Acceso administrativo</span></li>
-          </ul>
-          <button class="btn btn-secondary role-enter-btn">Ver Portal <i class="fa-solid fa-arrow-right"></i></button>
+          <i class="fa-solid fa-arrow-right"></i>
         </div>
       </div>
-
-      <p class="landing-footer-text">Demo interactivo de ventas &mdash; VÉSTIER Luxury Rentals &copy; 2026</p>
     </div>
   </div>
 
@@ -458,7 +418,7 @@
   <!-- ============================================================
        CLIENT PORTAL (Full-screen mobile-style view for "Cliente")
        ============================================================ -->
-  <div class="client-portal" id="client-portal" style="display:none;">
+  <div class="client-portal" id="client-portal">
     <div class="client-portal-header">
       <div class="client-brand">
         <i class="fa-solid fa-crown gold-icon"></i>
@@ -468,8 +428,8 @@
         <button class="btn btn-secondary btn-icon btn-small" id="client-qr-btn" title="Escanear QR">
           <i class="fa-solid fa-qrcode"></i>
         </button>
-        <button class="btn-logout" id="btn-logout-client" title="Salir">
-          <i class="fa-solid fa-right-from-bracket"></i>
+        <button class="btn btn-secondary btn-small" id="btn-staff-login" title="Acceso Staff">
+          <i class="fa-solid fa-lock"></i> <span class="staff-btn-text">Staff</span>
         </button>
       </div>
     </div>
