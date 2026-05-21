@@ -734,6 +734,10 @@ function handleAi(query) {
 // ══════════════════════════════════════════════════
 function initClientPortal() {
   renderClientCatalog();
+  initHeroParticles();
+  initScrollAnimations();
+  initNavScroll();
+  initSmoothScroll();
 
   $('client-qr-btn').addEventListener('click', () => {
     $('client-scanner').style.display = 'flex';
@@ -748,7 +752,47 @@ function initClientPortal() {
 
   $('client-product-back').addEventListener('click', () => {
     $('client-product-detail').style.display = 'none';
-    $('client-catalog-section').style.display = 'block';
+    $('cp-catalog-section').style.display = 'block';
+  });
+}
+
+function initHeroParticles() {
+  const container = $('cp-hero-particles');
+  if (!container) return;
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'cp-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 6 + 's';
+    p.style.animationDuration = (4 + Math.random() * 4) + 's';
+    container.appendChild(p);
+  }
+}
+
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  $$('.animate-on-scroll').forEach(el => observer.observe(el));
+}
+
+function initNavScroll() {
+  const nav = $('cp-nav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+}
+
+function initSmoothScroll() {
+  $$('.cp-nav-link, .cp-hero-cta-row a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href.startsWith('#')) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
 }
 
@@ -779,8 +823,9 @@ function showClientProduct(id) {
   const d = state.dresses.find(x => x.id === id);
   if (!d) return;
 
-  $('client-catalog-section').style.display = 'none';
+  $('cp-catalog-section').style.display = 'none';
   $('client-product-detail').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   $('client-product-img').src = d.image;
   $('client-product-brand').innerText = d.brand;

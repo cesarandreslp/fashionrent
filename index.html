@@ -419,25 +419,80 @@
        CLIENT PORTAL (Full-screen mobile-style view for "Cliente")
        ============================================================ -->
   <div class="client-portal" id="client-portal">
-    <div class="client-portal-header">
-      <div class="client-brand">
-        <i class="fa-solid fa-crown gold-icon"></i>
+
+    <!-- Floating Nav -->
+    <nav class="cp-nav" id="cp-nav">
+      <div class="cp-nav-brand">
+        <i class="fa-solid fa-crown"></i>
         <span>VÉSTIER</span>
       </div>
-      <div class="client-header-actions">
+      <div class="cp-nav-links">
+        <a href="#cp-hero" class="cp-nav-link">Inicio</a>
+        <a href="#cp-catalog-section" class="cp-nav-link">Colección</a>
+        <a href="#cp-contact" class="cp-nav-link">Contacto</a>
+      </div>
+      <div class="cp-nav-actions">
         <button class="btn btn-secondary btn-icon btn-small" id="client-qr-btn" title="Escanear QR">
           <i class="fa-solid fa-qrcode"></i>
         </button>
-        <button class="btn btn-secondary btn-small" id="btn-staff-login" title="Acceso Staff">
-          <i class="fa-solid fa-lock"></i> <span class="staff-btn-text">Staff</span>
+        <button class="cp-staff-btn" id="btn-staff-login" title="Acceso Staff">
+          <i class="fa-solid fa-lock"></i>
         </button>
       </div>
-    </div>
+    </nav>
 
-    <div class="client-hero">
-      <h2>Alquiler de Alta Costura</h2>
-      <p>Vestidos exclusivos para eventos en Santiago de Cali</p>
-    </div>
+    <!-- ── HERO Full-Screen ── -->
+    <section class="cp-hero" id="cp-hero">
+      <div class="cp-hero-bg"></div>
+      <div class="cp-hero-overlay"></div>
+      <div class="cp-hero-particles" id="cp-hero-particles"></div>
+      <div class="cp-hero-content animate-fade-up">
+        <span class="cp-hero-eyebrow">Santiago de Cali &middot; Guadalajara de Buga</span>
+        <h1 class="cp-hero-title">Alta Costura<br><em>en Alquiler</em></h1>
+        <p class="cp-hero-subtitle">Dolce &amp; Gabbana &middot; Louis Vuitton &middot; Versace &middot; Chanel &middot; Dior</p>
+        <div class="cp-hero-cta-row">
+          <a href="#cp-catalog-section" class="cp-btn-primary"><i class="fa-solid fa-gem"></i> Ver Colección</a>
+          <a href="https://wa.me/573164984843?text=Hola%20VÉSTIER%2C%20quiero%20información" class="cp-btn-outline" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="cp-hero-stats">
+          <div class="cp-stat"><span class="cp-stat-number">50+</span><span class="cp-stat-label">Vestidos Premium</span></div>
+          <div class="cp-stat-divider"></div>
+          <div class="cp-stat"><span class="cp-stat-number">6</span><span class="cp-stat-label">Marcas de Lujo</span></div>
+          <div class="cp-stat-divider"></div>
+          <div class="cp-stat"><span class="cp-stat-number">500+</span><span class="cp-stat-label">Clientas Felices</span></div>
+        </div>
+      </div>
+      <div class="cp-hero-scroll">
+        <span>Explorar</span>
+        <div class="cp-scroll-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+      </div>
+    </section>
+
+    <!-- ── Value Proposition ── -->
+    <section class="cp-value-section">
+      <div class="cp-value-grid">
+        <div class="cp-value-card animate-on-scroll">
+          <div class="cp-value-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h4>Protección Total</h4>
+          <p>Seguro premium incluido en cada alquiler</p>
+        </div>
+        <div class="cp-value-card animate-on-scroll">
+          <div class="cp-value-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <h4>Entrega Express</h4>
+          <p>Recibe tu vestido en tu domicilio</p>
+        </div>
+        <div class="cp-value-card animate-on-scroll">
+          <div class="cp-value-icon"><i class="fa-solid fa-certificate"></i></div>
+          <h4>100% Auténtico</h4>
+          <p>Solo prendas originales verificadas</p>
+        </div>
+        <div class="cp-value-card animate-on-scroll">
+          <div class="cp-value-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h4>Asesoría Personalizada</h4>
+          <p>Estilista dedicada para tu evento</p>
+        </div>
+      </div>
+    </section>
 
     <!-- QR Scanner Overlay -->
     <div class="client-scanner-overlay" id="client-scanner" style="display:none;">
@@ -446,11 +501,46 @@
       <button class="btn btn-secondary btn-small" id="client-cancel-scan">Cancelar</button>
     </div>
 
-    <!-- Catalog Grid -->
-    <div class="client-catalog-section" id="client-catalog-section">
-      <h3 class="client-section-title">Colección Disponible</h3>
+    <!-- ── Catalog Grid ── -->
+    <section class="cp-catalog-section" id="cp-catalog-section">
+      <div class="cp-section-header animate-on-scroll">
+        <span class="cp-section-eyebrow">Temporada 2026</span>
+        <h2 class="cp-section-title">Colección Disponible</h2>
+        <p class="cp-section-subtitle">Piezas exclusivas seleccionadas para los eventos más importantes</p>
+      </div>
       <div class="client-catalog-grid" id="client-catalog-grid"></div>
-    </div>
+    </section>
+
+    <!-- ── CTA / Contact ── -->
+    <section class="cp-contact-section" id="cp-contact">
+      <div class="cp-contact-content animate-on-scroll">
+        <span class="cp-section-eyebrow">¿Lista para brillar?</span>
+        <h2 class="cp-section-title" style="color:#FAF9F6">Reserva Tu Vestido Hoy</h2>
+        <p style="color:rgba(250,249,246,0.7); max-width:500px; margin:0 auto 2rem;">Escríbenos por WhatsApp y una asesora te guiará para encontrar el vestido perfecto para tu evento.</p>
+        <div class="cp-contact-cards">
+          <div class="cp-location-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h4>Cali</h4>
+            <p>Av. 6 Oeste &middot; Ciudad Jardín</p>
+          </div>
+          <div class="cp-location-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h4>Buga</h4>
+            <p>Centro Histórico</p>
+          </div>
+        </div>
+        <a href="https://wa.me/573164984843?text=Hola%20VÉSTIER%2C%20quiero%20reservar%20un%20vestido" class="cp-btn-whatsapp-big" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Reservar por WhatsApp
+        </a>
+        <p class="cp-phone-text"><i class="fa-solid fa-phone"></i> 316 498 4843</p>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer class="cp-footer">
+      <div class="cp-footer-brand"><i class="fa-solid fa-crown"></i> VÉSTIER Luxury Rentals</div>
+      <p>&copy; 2026 &middot; Santiago de Cali, Colombia</p>
+    </footer>
 
     <!-- Product Detail (hidden by default) -->
     <div class="client-product-detail" id="client-product-detail" style="display:none;">
